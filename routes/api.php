@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('cache')->group(function () {
+    Route::post('/', [JobController::class, 'filterCache']);
+});
+
+Route::prefix('job')->group(function () {
+    Route::post('/create', [JobController::class, 'create']);
 });

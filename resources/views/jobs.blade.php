@@ -1,6 +1,8 @@
 @extends('layout')
-@extends('components.jobs.registerModal')
+@include('components.jobs.registerModal')
+@include('components.filters')
 @section('content')
+@yield('registerModal')
 <style>
     .card:hover {
         -xpedu-transform: scale(1);
@@ -13,12 +15,17 @@
         <div class="container d-flex justify-content-between mb-3 flex-wrap">
             <div class="d-flex col-6">
                 <input type="text" class="form-control">
-                <button class="ml-1 btn btn-outline-primary">Pesquisar</button>
+                <button class="ml-1 btn btn-dark">Pesquisar</button>
+                <div class="">
+                    <button class="ml-2 btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">Filtros</button>
+                </div>
             </div>
             <div>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#register">+ Cadastrar Vaga</button>
             </div>
         </div>
+        @yield('filters')
         @foreach($data['data'] as $job)
             <div class="card mt-3">
                 <div class="row g-0 ">
