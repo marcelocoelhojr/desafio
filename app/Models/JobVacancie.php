@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class JobVacancie extends Model
 {
@@ -12,9 +14,16 @@ class JobVacancie extends Model
     protected $fillable = [
         'title',
         'modality',
+        'city',
+        'state',
         'type',
         'salary',
         'image',
         'description'
     ];
+
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Addresses::class, 'address_id', 'id');
+    }
 }
