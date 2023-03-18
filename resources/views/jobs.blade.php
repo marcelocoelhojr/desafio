@@ -1,4 +1,5 @@
 @extends('layout')
+@extends('components.jobs.registerModal')
 @section('content')
 <style>
     .card:hover {
@@ -15,7 +16,7 @@
                 <button class="ml-1 btn btn-outline-primary">Pesquisar</button>
             </div>
             <div>
-                <button class="btn btn-danger">+ Cadastrar Vaga</button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#register">+ Cadastrar Vaga</button>
             </div>
         </div>
         @for($i = 0; $i < 4; $i++)
