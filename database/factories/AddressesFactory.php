@@ -27,6 +27,7 @@ class AddressesFactory extends Factory
             'RO', 'RR', 'SC',
             'SP', 'SE', 'TO',
         ];
+
         return [
             'state' => $states[rand(0, 26)],
             'city' => $this->faker->city,
