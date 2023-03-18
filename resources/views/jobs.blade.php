@@ -19,7 +19,7 @@
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#register">+ Cadastrar Vaga</button>
             </div>
         </div>
-        @foreach($data as $job)
+        @foreach($data['data'] as $job)
             <div class="card mt-3">
                 <div class="row g-0 ">
                     <div class="col-md-2">
@@ -51,6 +51,25 @@
                 </div>
             </div>
         @endforeach
+        <div class="mt-4 d-flex justify-content-end">
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $data['prev_page_url'] }}" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    @foreach ($data['links'] as $link)
+                        @if ($link['label'] != 'Next &raquo;' && $link['label'] != '&laquo; Previous')
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $link['url'] }}"> {{ $link['label']}}</a>
+                            </li>
+                        @endif
+                    @endforeach
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $data['next_page_url'] }}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 </div>
 </div>
 @endsection('content')

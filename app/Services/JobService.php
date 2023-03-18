@@ -8,12 +8,14 @@ use Illuminate\Support\Collection;
 class JobService
 {
     /**
-     * Get jobs
+     * Get jobs with pages
      *
      * @return Collection
      */
-    public function list(): Collection
+    public function list(array $param): Collection
     {
-        return collect(JobVacancie::with('address')->get());
+        $perPage = $param['per_page'] ?? 5;
+
+        return collect(JobVacancie::with('address')->paginate($perPage));
     }
 }
