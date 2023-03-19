@@ -18,3 +18,11 @@
 .separator::after {
     margin-left: .25em;
 }
+
+#errorAlert{
+    display: none;
+ }
+
+ #successAlert{
+    display: none;
+ }

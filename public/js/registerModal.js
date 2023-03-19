@@ -27,7 +27,20 @@ $(document).on('click', '#saveRegister', function() {
             complement: document.getElementById('complement').value
         },
         success: function(data) {
-
+            document.getElementById('title').value = ''
+            document.getElementById('salary').value = ''
+            document.getElementById('description').value = ''
+            document.getElementById('cep').value = ''
+            document.getElementById('neighborhood').value = ''
+            document.getElementById('street').value = ''
+            document.getElementById('state').value = ''
+            document.getElementById('city').value = ''
+            document.getElementById('number').value = ''
+            document.getElementById('complement').value = ''
+            $("#successAlert").show().hide(8000);
+        },
+        error: function (request, status, error) {
+            $("#errorAlert").show().hide(8000);
         }
     });
 });

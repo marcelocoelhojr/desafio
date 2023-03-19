@@ -14,6 +14,12 @@
                 </button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-danger" id="errorAlert" role="alert" >
+                    Erro ao cadastrar vaga
+                </div>
+                <div class="alert alert-success" id="successAlert" role="alert" >
+                    Vaga cadastrada com sucesso
+                </div>
                 <div class="separator h4 text text-secondary">Vaga</div>
                 <div class="row col-12 mt-3">
                     <div class="col-12">
