@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobsListCollection;
 use App\Services\JobService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -40,11 +41,31 @@ class JobController extends Controller
     }
 
     /**
-     * Get jobs with pages
+     * Get jobs with pages for view
      *
      * @param Request $request
      */
     public function list(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'page' => 'nullable|integer',
+            'per_page' => 'nullable|integer',
+        ]);
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $jobService = new JobService();
+        $jobs = $jobService->list($validator->validated());
+
+        return apiResponse(new JobsListCollection($jobs), 'lista de vagas');
+    }
+
+    /**
+     * Get jobs with pages for view
+     *
+     * @param Request $request
+     */
+    public function listView(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'page' => 'integer',
@@ -54,7 +75,7 @@ class JobController extends Controller
             throw new ValidationException($validator);
         }
         $jobService = new JobService();
-        $jobs = $jobService->list($validator->validated());
+        $jobs = $jobService->listView($validator->validated());
 
         return view('jobs', ['data' => $jobs->toArray()]);
     }

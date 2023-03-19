@@ -39,12 +39,24 @@ class JobService
         return collect($response);
     }
 
-    /**
-     * Get jobs with pages
+     /**
+     * Get jobs with pages for view
      *
      * @return Collection
      */
     public function list(array $params): Collection
+    {
+        $perPage = $params['per_page'] ?? 5;
+
+        return collect(JobVacancie::with('address')->paginate($perPage));
+    }
+
+    /**
+     * Get jobs with pages for view
+     *
+     * @return Collection
+     */
+    public function listView(array $params): Collection
     {
         $this->checkFilterCache($params);
         $perPage = $params['per_page'] ?? 5;

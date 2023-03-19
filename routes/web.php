@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('layout');
 });
 
-Route::get('/jobs', [JobController::class, 'list']);
+Route::get('/jobs', [JobController::class, 'listView']);
 
 Route::get('/teste', function () {
     return view('components.jobs.registerModal');
