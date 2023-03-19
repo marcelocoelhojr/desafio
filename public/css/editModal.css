@@ -1,0 +1,11 @@
+#editModal {
+    display: none;
+}
+
+#errorAlertEdit{
+    display: none;
+ }
+
+ #successAlertEdit{
+    display: none;
+ }

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     $('#salary').mask('###0.00', {
         reverse: true
     });
@@ -7,7 +7,7 @@ $(function() {
     });
 })
 
-$(document).on('click', '#saveRegister', function() {
+$(document).on('click', '#saveRegister', function () {
     $.ajax({
         url: 'api/job/create',
         method: 'POST',
@@ -24,9 +24,10 @@ $(document).on('click', '#saveRegister', function() {
             state: document.getElementById('state').value,
             city: document.getElementById('city').value,
             number: document.getElementById('number').value,
-            complement: document.getElementById('complement').value
+            complement: document.getElementById('complement').value,
+            status: 'Em andamento'
         },
-        success: function(data) {
+        success: function (data) {
             document.getElementById('title').value = ''
             document.getElementById('salary').value = ''
             document.getElementById('description').value = ''
@@ -45,14 +46,14 @@ $(document).on('click', '#saveRegister', function() {
     });
 });
 
-$(document).on('blur', '#cep', function() {
+$(document).on('blur', '#cep', function () {
     var cep = $(this).val();
     cep = cep.replace(/[^a-z0-9]/gi, "");
     $.ajax({
         url: 'https://viacep.com.br/ws/' + cep + '/json/',
         method: 'GET',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             if (data.erro) {
                 alert('Endereço não encontrado');
             }

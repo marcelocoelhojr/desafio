@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\JobResource;
 use App\Http\Resources\JobsListCollection;
+use App\Models\Job;
 use App\Services\JobService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,21 +21,7 @@ class JobController extends Controller
      */
     public function create(Request $request): JsonResponse
     {
-        $rules = [
-            'title' => 'required|string',
-            'modality' => 'required|string',
-            'type' => 'required|string',
-            'salary' => 'nullable|string',
-            'description' => 'nullable|string',
-            'cep' => 'nullable|string',
-            'neighborhood' => 'nullable|string',
-            'street' => 'nullable|string',
-            'state' => 'required|string',
-            'city' => 'required|string',
-            'number' => 'nullable|integer',
-            'complement' => 'nullable|string',
-        ];
-        $validator = validate($rules, $request->all());
+        $validator = validate(Job::$rules, $request->all());
         $jobService = new JobService();
         $jobs = $jobService->create($validator->validated());
 
@@ -58,6 +46,35 @@ class JobController extends Controller
         $jobs = $jobService->list($validator->validated());
 
         return apiResponse(new JobsListCollection($jobs), 'lista de vagas');
+    }
+
+    /**
+     * Get job by id
+     *
+     * @param int $jobId
+     * @return JsonResponse
+     */
+    public function getJob(int $jobId): JsonResponse
+    {
+        $jobService = new JobService();
+        $job = $jobService->getJob($jobId);
+
+        return apiResponse(new JobResource($job), 'consulta realizada com sucesso');
+    }
+
+    /**
+     * Update job by id
+     *
+     * @param int $jobId
+     * @return JsonResponse
+     */
+    public function update(Request $request, int $jobId): JsonResponse
+    {
+        $validator = validate(Job::$rules, $request->all());
+        $jobService = new JobService();
+        $jobService->update($jobId, $validator->validated());
+
+        return apiResponse([], 'atualização realizada com sucesso');
     }
 
     /**

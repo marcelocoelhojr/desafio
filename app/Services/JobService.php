@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\JobException;
 use App\Models\Job;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +50,45 @@ class JobService
         $perPage = $params['per_page'] ?? 5;
 
         return $this->getJobs($perPage);
+    }
+
+    /**
+     * Update job by id
+     *
+     * @param int $jobId
+     * @param array $params
+     * @return void
+     */
+    public function update(int $jobId, array $params): void
+    {
+        try {
+            DB::transaction(function () use ($jobId, $params) {
+                $addressService = new AddressService();
+                $addressService->update($params['addressId'], $params);
+                Job::where('id', $jobId)->update([
+                    'title' => $params['title'],
+                    'modality' => $params['modality'],
+                    'type' => $params['type'],
+                    'status' => $params['status'],
+                    'salary' => (float)$params['salary'] ?? null,
+                    'description' => $params['description'] ?? null,
+                    'image' => $params['image'] ?? 'https://via.placeholder.com/640x640.png/0088aa?text=job+Faker+et'
+                ]);
+            });
+        } catch (Exception $e) {
+            throw new JobException('erro ao atualizar vaga de emprego');
+        }
+    }
+
+    /**
+     * Get job by id
+     *
+     * @param int $jobId
+     * @return Collection
+     */
+    public function getJob(int $jobId): Collection
+    {
+        return Job::with('address')->where('id', $jobId)->get();
     }
 
     /**

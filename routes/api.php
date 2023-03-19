@@ -22,6 +22,8 @@ Route::prefix('cache')->group(function () {
 Route::prefix('job')->group(function () {
     Route::post('/create', [JobController::class, 'create']);
     Route::get('/list', [JobController::class, 'list']);
+    Route::get('/{id}', [JobController::class, 'getJob']);
+    Route::put('/update/{id}', [JobController::class, 'update']);
 });
 
 Route::prefix('address')->group(function () {

@@ -20,7 +20,25 @@ class Job extends Model
         'salary',
         'image',
         'description',
+        'status',
         'address_id'
+    ];
+
+    public static array $rules = [
+        'title' => 'required|string',
+        'modality' => 'required|string',
+        'type' => 'required|string',
+        'salary' => 'nullable|string',
+        'description' => 'nullable|string',
+        'status' => 'required|string',
+        'cep' => 'nullable|string',
+        'neighborhood' => 'nullable|string',
+        'street' => 'nullable|string',
+        'state' => 'required|string',
+        'city' => 'required|string',
+        'number' => 'nullable|integer',
+        'complement' => 'nullable|string',
+        'addressId' => 'integer'
     ];
 
     public function address(): BelongsTo

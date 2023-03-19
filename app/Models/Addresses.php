@@ -18,4 +18,15 @@ class Addresses extends Model
         "number",
         "complement"
     ];
+
+    public static array $rules = [
+        'cep' => 'nullable|string',
+        'neighborhood' => 'nullable|string',
+        'street' => 'nullable|string',
+        'state' => 'required|string',
+        'city' => 'required|string',
+        'number' => 'nullable|integer',
+        'complement' => 'nullable|string',
+        'addressId' => 'integer',
+    ];
 }
