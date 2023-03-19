@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Addresses;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobVacancie>
  */
-class JobVacancieFactory extends Factory
+class JobFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,17 +17,23 @@ class JobVacancieFactory extends Factory
      */
     public function definition(): array
     {
+        $address = Addresses::pluck('id');
         $type = ['Presencial', 'Remoto', 'Hibrido'];
         $modality = ['Freelancer', 'PJ', 'CLT'];
-
+        $image = [
+            'img/gestao-de-TI.jpg',
+            'img/InternalUser.png',
+            'img/Softwares-de-gestão-na-transformação-digital-2.png',
+            'img/Gerenciamento-dos-Servico-de-TI-sua-empresa-esta-preparada-para-crescer.png'
+        ];
         return [
             'title' => $this->faker->jobTitle,
             'modality' => $modality[rand(0, 2)],
             'type' => $type[rand(0, 2)],
             'salary' => $this->faker->buildingNumber,
-            'image' => $this->faker->imageUrl(640, 640, 'job', true, 'Faker'),
+            'image' => $image[rand(0, 3)],
             'description' => $this->faker->jobTitle,
-            'address_id' => rand(0, 20)
+            'address_id' => $address->random(1)[0]
         ];
     }
 }

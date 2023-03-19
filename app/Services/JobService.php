@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Addresses;
-use App\Models\JobVacancie;
+use App\Models\Job;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -25,12 +24,12 @@ class JobService
         DB::transaction(function () use ($params, &$response) {
             $addressService = new AddressService();
             $address = $addressService->create($params);
-            $response = JobVacancie::create([
+            $response = Job::create([
                 'address_id' => $address['id'],
                 'title' => $params['title'],
                 'modality' => $params['modality'],
                 'type' => $params['type'],
-                'salary' => (double)$params['salary'] ?? null,
+                'salary' => (float)$params['salary'] ?? null,
                 'description' => $params['description'] ?? null,
                 'image' => $params['image'] ?? 'https://via.placeholder.com/640x640.png/0088aa?text=job+Faker+et'
             ]);
@@ -39,7 +38,7 @@ class JobService
         return collect($response);
     }
 
-     /**
+    /**
      * Get jobs with pages for view
      *
      * @return Collection
@@ -48,7 +47,7 @@ class JobService
     {
         $perPage = $params['per_page'] ?? 5;
 
-        return collect(JobVacancie::with('address')->paginate($perPage));
+        return $this->getJobs($perPage);
     }
 
     /**
@@ -61,7 +60,18 @@ class JobService
         $this->checkFilterCache($params);
         $perPage = $params['per_page'] ?? 5;
 
-        return collect(JobVacancie::with('address')->paginate($perPage));
+        return $this->getJobs($perPage);
+    }
+
+    /**
+     * Get jobs with pages
+     *
+     * @param int $perPage
+     * @return Collection
+     */
+    private function getJobs(int $perPage): Collection
+    {
+        return collect(Job::with('address')->paginate($perPage));
     }
 
     /**

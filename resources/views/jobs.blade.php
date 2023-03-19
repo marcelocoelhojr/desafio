@@ -24,7 +24,7 @@
             <div class="card mt-3">
                 <div class="row g-0 ">
                     <div class="col-md-2">
-                        <img style="max-height: 150px;" class="card-img" id="img" src="{{ $job['image'] }}" alt="https://img.freepik.com/fotos-gratis/pessoas-sorridentes-de-tiro-medio-no-escritorio_23-2149300697.jpg?w=1380&t=st=1679084215~exp=1679084815~hmac=4a4cd4b93a1d61a2b2728ace65f34020ff25a1605e8d12a3ba158f565f2ed007" class="img-fluid rounded-start" />
+                        <img style="max-height: 150px;" class="card-img" id="img" src="{{ asset($job['image']) }}" alt="https://img.freepik.com/fotos-gratis/pessoas-sorridentes-de-tiro-medio-no-escritorio_23-2149300697.jpg?w=1380&t=st=1679084215~exp=1679084815~hmac=4a4cd4b93a1d61a2b2728ace65f34020ff25a1605e8d12a3ba158f565f2ed007" class="img-fluid rounded-start" />
                     </div>
                     <div class="col-md-10 d-flex flex-column justify-content-between ">
                         <div class="mt-2">

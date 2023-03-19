@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_vacancies', function (Blueprint $table) {
+        Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title', 250);
             $table->enum('modality', ['Freelancer', 'PJ', 'CLT']);
@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('salary', 5.3)->nullable();
             $table->string('image');
             $table->string('description', 250);
+            $table->enum('status', ['Em andamento', 'Pendente', 'Encerrado']);
             $table->unsignedBigInteger('address_id');
             $table->foreign('address_id')->references('id')->on('addresses');
             $table->timestamps();
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_vacancies');
+        Schema::dropIfExists('jobs');
     }
 };
