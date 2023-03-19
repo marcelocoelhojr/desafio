@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\AddressException;
 use App\Models\Addresses;
+use Exception;
 use Illuminate\Support\Collection;
 
 class AddressService
@@ -15,16 +17,20 @@ class AddressService
      */
     public function create(array $params): Collection
     {
-        $data = [
-            "state" => $params['state'],
-            "city" => $params['city'],
-            "cep" => $params['cep'] ?? null,
-            "street" => $params['street'] ?? null,
-            "number" => $params['number'] ?? null,
-            "complement" => $params['complement'] ?? null,
-            "neighborhood" => $params['neighborhood'] ?? null
-        ];
+        try {
+            $data = [
+                "state" => $params['state'],
+                "city" => $params['city'],
+                "cep" => $params['cep'] ?? null,
+                "street" => $params['street'] ?? null,
+                "number" => $params['number'] ?? null,
+                "complement" => $params['complement'] ?? null,
+                "neighborhood" => $params['neighborhood'] ?? null
+            ];
 
-        return collect(Addresses::create($data));
+            return collect(Addresses::create($data));
+        } catch (Exception) {
+            throw new AddressException('erro ao cadastrar endereço');
+        }
     }
 }

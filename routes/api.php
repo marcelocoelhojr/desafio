@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,5 @@ Route::prefix('job')->group(function () {
 });
 
 Route::prefix('address')->group(function () {
-    Route::post('/create', [JobController::class, 'create']);
+    Route::post('/create', [AddressController::class, 'create']);
 });
