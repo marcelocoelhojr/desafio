@@ -1,25 +1,5 @@
 @section('filters')
-<script>
-    $(document).on('click', '#save', function() {
-        var perPage = document.getElementById('per_page').value;
-        $.ajax({
-            url: 'api/cache',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                per_page: perPage
-            },
-            success: function(data) {
-
-            }
-        });
-        refreshPage();
-    });
-
-    function refreshPage() {
-        location.reload(true);
-    }
-</script>
+<script type="text/javascript" src="{{asset('js/filters.js')}}"></script>
 <div class="collapse mt-2" id="collapseExample">
     <div class="card card-body bg-light">
         <div class="col-md-12 col-sm-12 d-flex">

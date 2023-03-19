@@ -2,83 +2,8 @@
 @section('registerModal')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-<script>
-    $(function() {
-        $('#salary').mask('###0.00', {
-            reverse: true
-        });
-        $('#cep').mask('00000-000', {
-            reverse: true
-        });
-    })
-
-    $(document).on('click', '#saveRegister', function() {
-        $.ajax({
-            url: 'api/job/create',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                title: document.getElementById('title').value,
-                modality: document.getElementById('modality').value,
-                type: document.getElementById('type').value,
-                salary: document.getElementById('salary').value,
-                description: document.getElementById('description').value,
-                cep: document.getElementById('cep').value,
-                neighborhood: document.getElementById('neighborhood').value,
-                street: document.getElementById('street').value,
-                state: document.getElementById('state').value,
-                city: document.getElementById('city').value,
-                number: document.getElementById('number').value,
-                complement: document.getElementById('complement').value
-            },
-            success: function(data) {
-
-            }
-        });
-    });
-
-    $(document).on('blur', '#cep', function() {
-        var cep = $(this).val();
-        cep = cep.replace(/[^a-z0-9]/gi, "");
-        $.ajax({
-            url: 'https://viacep.com.br/ws/' + cep + '/json/',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data) {
-                if (data.erro) {
-                    alert('Endereço não encontrado');
-                }
-                $('#city').val(data.localidade),
-                    $('#state').val(data.uf),
-                    $('#street').val(data.logradouro),
-                    $('#neighborhood').val(data.bairro)
-                $('#complement').val(data.complemento)
-            }
-        });
-    });
-</script>
-<style>
-    .separator {
-        display: flex;
-        align-items: center;
-        text-align: center;
-    }
-
-    .separator::before,
-    .separator::after {
-        content: '';
-        flex: 1;
-        border-bottom: 3px solid #808080;
-    }
-
-    .separator::before {
-        margin-right: .25em;
-    }
-
-    .separator::after {
-        margin-left: .25em;
-    }
-</style>
+<link href="{{ asset('css/registerModal.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('js/registerModal.js') }}"></script>
 <div class="modal fade" id="register" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">

@@ -3,13 +3,7 @@
 @include('components.filters')
 @section('content')
 @yield('registerModal')
-<style>
-    .card:hover {
-        -xpedu-transform: scale(1);
-        -ms-transform: scale(1.5);
-        transform: scale(1.01);
-    }
-</style>
+<link href="{{ asset('css/job.css') }}" rel="stylesheet">
 <div class="mt-3 d-flex justify-content-center flex-column">
     <div class="d-flex flex-column mt-3">
         <div class="container d-flex justify-content-between mb-3 flex-wrap">

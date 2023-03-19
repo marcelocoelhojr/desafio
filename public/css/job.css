@@ -1,0 +1,5 @@
+.card:hover {
+    -xpedu-transform: scale(1);
+    -ms-transform: scale(1.5);
+    transform: scale(1.01);
+}
