@@ -20,9 +20,31 @@ class JobController extends Controller
 {
     /**
      * Create job
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
+        $rules = [
+            'title' => 'required|string',
+            'modality' => 'required|string',
+            'type' => 'required|string',
+            'salary' => 'numeric',
+            'description' => 'string',
+            'cep' => 'string',
+            'neighborhood' => 'string',
+            'street' => 'string',
+            'state' => 'required|string',
+            'city' => 'required|string',
+            'number' => 'integer',
+            'complement' => 'string',
+        ];
+        $validator = validate($rules, $request->all());
+        $jobService = new JobService();
+        $jobs = $jobService->create($validator->validated());
+
+        return apiResponse($jobs, 'vaga de emprego criada com sucesso');
     }
 
     /**
@@ -49,19 +71,16 @@ class JobController extends Controller
      * Create filter cache
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
-    public function filterCache(Request $request): Response
+    public function filterCache(Request $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'per_page' => 'integer',
-        ]);
-        if ($validator->fails()) {
-            throw new ValidationException($validator);
-        }
+        $rules = ['per_page' => 'integer'];
+        $validator = validate($rules, $request->all());
+        
         $jobService = new JobService();
-        $jobService->cache($validator->validated());
+        $cache = $jobService->cache($validator->validated());
 
-        return Response('success', 200);
+        return apiResponse($cache, 'cache criado com sucesso');
     }
 }

@@ -19,7 +19,8 @@ class JobVacancie extends Model
         'type',
         'salary',
         'image',
-        'description'
+        'description',
+        'address_id'
     ];
 
     public function address(): BelongsTo

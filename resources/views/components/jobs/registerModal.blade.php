@@ -24,7 +24,7 @@ $(document).on('blur', '#cep', function () {
                 alert('Endereço não encontrado');
             }
             $('#city').val(data.localidade),
-            $('#uf').val(data.uf),
+            $('#state').val(data.uf),
             $('#street').val(data.logradouro),
             $('#neighborhood').val(data.bairro)
             $('#complement').val(data.complemento)

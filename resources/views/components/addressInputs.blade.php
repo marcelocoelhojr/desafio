@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-4 col-sm-4">
             <label for="" class="form-label">Estado<span class="text text-danger">*</span></label>
-            <select name="uf" id="uf" class="form-select" aria-placeholder="UF" require>
+            <select name="state" id="state" class="form-select" aria-placeholder="UF" require>
                 <option>AC</option>
                 <option>AL</option>
                 <option>AP</option>
