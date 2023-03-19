@@ -30,7 +30,7 @@ class JobService
                 'title' => $params['title'],
                 'modality' => $params['modality'],
                 'type' => $params['type'],
-                'salary' => $params['salary'] ?? null,
+                'salary' => (double)$params['salary'] ?? null,
                 'description' => $params['description'] ?? null,
                 'image' => $params['image'] ?? 'https://via.placeholder.com/640x640.png/0088aa?text=job+Faker+et'
             ]);

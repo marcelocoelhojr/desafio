@@ -22,15 +22,15 @@ class JobController extends Controller
             'title' => 'required|string',
             'modality' => 'required|string',
             'type' => 'required|string',
-            'salary' => 'numeric',
-            'description' => 'string',
-            'cep' => 'string',
-            'neighborhood' => 'string',
-            'street' => 'string',
+            'salary' => 'nullable|string',
+            'description' => 'nullable|string',
+            'cep' => 'nullable|string',
+            'neighborhood' => 'nullable|string',
+            'street' => 'nullable|string',
             'state' => 'required|string',
             'city' => 'required|string',
-            'number' => 'integer',
-            'complement' => 'string',
+            'number' => 'nullable|integer',
+            'complement' => 'nullable|string',
         ];
         $validator = validate($rules, $request->all());
         $jobService = new JobService();

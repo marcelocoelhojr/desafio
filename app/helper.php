@@ -43,7 +43,7 @@ if (!function_exists('validate')) {
         $validator = Validator::make($request, $rules);
         if ($validator->fails()) {
             dd($validator->messages()->messages());
-            throw new ValidateException($validator->messages()->messages());
+            // throw new ValidateException($validator->messages()->messages());
         }
 
         return $validator;
