@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['Em andamento', 'Pendente', 'Encerrado']);
             $table->unsignedBigInteger('address_id');
             $table->foreign('address_id')->references('id')->on('addresses');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

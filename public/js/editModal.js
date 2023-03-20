@@ -8,6 +8,31 @@ $(function () {
     });
 })
 
+$(document).on('click', '#deleteJob', function () {
+    $('#editModal').hide();
+});
+
+$(document).on('click', '#confirmDelete', function () {
+    let code = document.getElementById('confirmCodeDelete').value;
+    let confirmeCode = document.getElementById('confirmCode').innerText;
+    if (confirmeCode == code) {
+        let id = document.getElementById('confirmDelete').value;
+        deleteJob(id);
+    }
+    location.reload();
+});
+function deleteJob(id) {
+    $.ajax({
+        url: 'api/job/' + id,
+        method: 'DELETE',
+        dataType: 'json',
+        success: function (data) {
+            location.reload();
+        }
+    });
+}
+
+
 function edit(id) {
     $.ajax({
         url: 'api/job/' + id,
@@ -28,6 +53,7 @@ function edit(id) {
             document.getElementById('complementEdit').value = data.data[0].address.complement
             document.getElementById('editJob').value = data.data[0].id
             document.getElementById('addressId').value = data.data[0].address.id
+            document.getElementById('confirmDelete').value = data.data[0].id
         }
     });
 }

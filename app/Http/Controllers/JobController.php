@@ -78,6 +78,20 @@ class JobController extends Controller
     }
 
     /**
+     * Delete job by id
+     *
+     * @param int $jobId
+     * @return JsonResponse
+     */
+    public function delete(int $jobId): JsonResponse
+    {
+        $jobService = new JobService();
+        $jobService->delete($jobId);
+
+        return apiResponse([], 'vaga deletada com sucesso');
+    }
+
+    /**
      * Get jobs with pages for view
      *
      * @param Request $request

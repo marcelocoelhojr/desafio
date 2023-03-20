@@ -70,14 +70,30 @@ class JobService
                     'modality' => $params['modality'],
                     'type' => $params['type'],
                     'status' => $params['status'],
-                    'salary' => (float)$params['salary'] ?? null,
-                    'description' => $params['description'] ?? null,
-                    'image' => $params['image'] ?? 'https://via.placeholder.com/640x640.png/0088aa?text=job+Faker+et'
+                    'salary' => (float)$params['salary'],
+                    'description' => $params['description']
                 ]);
             });
         } catch (Exception $e) {
             throw new JobException('erro ao atualizar vaga de emprego');
         }
+    }
+
+    /**
+     * Delete job by id
+     *
+     * @param int $job
+     * @return void
+     */
+    public function delete(int $jobId): void
+    {
+        //TODO usar observer
+        DB::transaction(function () use ($jobId) {
+            $addressId = Job::select('address_id')->where('id', $jobId)->first();
+            Job::where('id', $jobId)->delete();
+            $addressService = new AddressService();
+            $addressService->delete($addressId->address_id);
+        });
     }
 
     /**

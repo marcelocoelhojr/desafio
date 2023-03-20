@@ -4,11 +4,35 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <link href="{{ asset('css/editModal.css') }}" rel="stylesheet">
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Deletar vaga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="h3 text text-muted">Para excluir confirme o código</h3>
+                <div class="d-flex flex-column align-items-center">
+                    <h6 class="h1 text text-success" id="confirmCode" value=""> {{ rand(1000,9999) }} </h6>
+                    <div class="col-2">
+                        <input type="text" class="form-control" id="confirmCodeDelete">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="confirmDelete">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="registerModalLabel">Edição</h5>
+                <h5 class="modal-title" id="registerModalLabel">Edição</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -137,7 +161,8 @@
                 </div>
             </div>
             <div class="modal-footer mr-3">
-                <button type="button" class="btn btn-danger" id="deleteJob">excluir</button>
+                <button type="button" class="btn btn-danger" id="deleteJob" data-toggle="modal"
+                data-target="#deleteModal">excluir</button>
                 <button type="button" class="btn btn-success" id="editJob" onclick="editJob(value)">salvar</button>
             </div>
         </div>

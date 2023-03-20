@@ -24,6 +24,7 @@ Route::prefix('job')->group(function () {
     Route::get('/list', [JobController::class, 'list']);
     Route::get('/{id}', [JobController::class, 'getJob']);
     Route::put('/update/{id}', [JobController::class, 'update']);
+    Route::delete('/{id}', [JobController::class, 'delete']);
 });
 
 Route::prefix('address')->group(function () {

@@ -58,4 +58,15 @@ class AddressService
             throw new AddressException('erro ao atualizar endereço');
         }
     }
+
+    /**
+     * Delete address by id
+     *
+     * @param int $jobId
+     * @return Collection
+     */
+    public function delete(int $addressId): Collection
+    {
+        return collect(Addresses::where('id', $addressId)->delete());
+    }
 }
