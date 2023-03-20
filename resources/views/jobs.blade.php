@@ -5,7 +5,6 @@
 @section('content')
 @yield('registerModal')
 @yield('editModal')
-
 <link href="{{ asset('css/job.css') }}" rel="stylesheet">
 <div class="mt-3 d-flex justify-content-center flex-column">
     <div class="d-flex flex-column mt-3">

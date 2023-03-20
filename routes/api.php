@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CandidateController;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,9 @@ Route::prefix('job')->group(function () {
 
 Route::prefix('address')->group(function () {
     Route::post('/create', [AddressController::class, 'create']);
+});
+
+Route::prefix('candidate')->group(function () {
+    Route::get('/list', [CandidateController::class, 'listCandidates']);
+    Route::post('/update', [CandidateController::class, 'updateCandidate']);
 });

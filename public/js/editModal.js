@@ -52,6 +52,7 @@ function edit(id) {
             document.getElementById('streetEdit').value = data.data.address.street
             document.getElementById('statusEdit').value = data.data.status
             document.getElementById('complementEdit').value = data.data.address.complement
+            document.getElementById('neighborhoodEdit').value = data.data.address.neighborhood
             document.getElementById('editJob').value = data.data.id
             document.getElementById('addressId').value = data.data.address.id
             document.getElementById('confirmDelete').value = data.data.id
