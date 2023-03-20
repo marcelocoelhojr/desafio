@@ -39,21 +39,23 @@ function edit(id) {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            document.getElementById('titleEdit').value = data.data[0].title
-            document.getElementById('salaryEdit').value = data.data[0].salary
-            document.getElementById('descriptionEdit').value = data.data[0].description
-            document.getElementById('modalityEdit').value = data.data[0].modality
-            document.getElementById('typeEdit').value = data.data[0].type
-            document.getElementById('neighborhoodEdit').value = data.data[0].address.neighborhood
-            document.getElementById('stateEdit').value = data.data[0].address.state
-            document.getElementById('cityEdit').value = data.data[0].address.city
-            document.getElementById('numberEdit').value = data.data[0].address.number
-            document.getElementById('cepEdit').value = data.data[0].address.cep
-            document.getElementById('streetEdit').value = data.data[0].address.street
-            document.getElementById('complementEdit').value = data.data[0].address.complement
-            document.getElementById('editJob').value = data.data[0].id
-            document.getElementById('addressId').value = data.data[0].address.id
-            document.getElementById('confirmDelete').value = data.data[0].id
+            console.log(data.data.title);
+            document.getElementById('titleEdit').value = data.data.title
+            document.getElementById('salaryEdit').value = data.data.salary
+            document.getElementById('descriptionEdit').value = data.data.description
+            document.getElementById('modalityEdit').value = data.data.modality
+            document.getElementById('typeEdit').value = data.data.type
+            document.getElementById('stateEdit').value = data.data.address.state
+            document.getElementById('cityEdit').value = data.data.address.city
+            document.getElementById('numberEdit').value = data.data.address.number
+            document.getElementById('cepEdit').value = data.data.address.cep
+            document.getElementById('streetEdit').value = data.data.address.street
+            document.getElementById('statusEdit').value = data.data.status
+            document.getElementById('complementEdit').value = data.data.address.complement
+            document.getElementById('editJob').value = data.data.id
+            document.getElementById('addressId').value = data.data.address.id
+            document.getElementById('confirmDelete').value = data.data.id
+
         }
     });
 }

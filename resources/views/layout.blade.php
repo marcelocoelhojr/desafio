@@ -36,7 +36,7 @@
                         <a href="jobs" class="nav-link text-white">Vagas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="teste" class="nav-link text-white">Candidatos</a>
+                        <a href="candidates" class="nav-link text-white">Candidatos</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link text-white">Inscrições</a>

@@ -27,7 +27,7 @@ class JobService
             $addressService = new AddressService();
             $address = $addressService->create($params);
             $response = Job::create([
-                'address_id' => $address['id'],
+                'address_id' => $address->id,
                 'title' => $params['title'],
                 'modality' => $params['modality'],
                 'type' => $params['type'],
@@ -64,7 +64,7 @@ class JobService
         try {
             DB::transaction(function () use ($jobId, $params) {
                 $addressService = new AddressService();
-                $addressService->update($params['addressId'], $params);
+                $addressService->updateAddress($params['addressId'], $params);
                 Job::where('id', $jobId)->update([
                     'title' => $params['title'],
                     'modality' => $params['modality'],
@@ -104,7 +104,7 @@ class JobService
      */
     public function getJob(int $jobId): Collection
     {
-        return Job::with('address')->where('id', $jobId)->get();
+        return collect(Job::with('address')->where('id', $jobId)->first());
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Candidate;
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', [JobController::class, 'listView']);
+Route::get('/candidates', [Candidate::class, 'listView']);
 
 Route::get('/teste', function () {
     return view('components.jobs.registerModal');

@@ -2,60 +2,59 @@
 
 namespace App\Services;
 
-use App\Exceptions\AddressException;
+use App\Exceptions\JobException;
 use App\Models\Addresses;
+use App\Models\Job;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class AddressService
 {
     /**
-     * Create addresses
+     * Create address
      *
      * @param array $params
-     * @return Collection
+     * @return Addresses
      */
-    public function create(array $params): Collection
+    public function create(array $params): Addresses
     {
-        try {
-            $data = [
-                "state" => $params['state'],
-                "city" => $params['city'],
-                "cep" => $params['cep'] ?? null,
-                "street" => $params['street'] ?? null,
-                "number" => $params['number'] ?? null,
-                "complement" => $params['complement'] ?? null,
-                "neighborhood" => $params['neighborhood'] ?? null
-            ];
+        $data = [
+            'city' => $params['city'],
+            'state' => $params['state'],
+            'cep' => $params['cep'] ?? null,
+            'neighborhood' => $params['neighborhood'] ?? null,
+            'street' => $params['street'] ?? null,
+            'description' => $params['description'],
+            'number' => $params['number'],
+            'complement' => $params['complement']
+        ];
 
-            return collect(Addresses::create($data));
-        } catch (Exception) {
-            throw new AddressException('erro ao cadastrar endereço');
-        }
+        return Addresses::create($data);
     }
 
     /**
-     * Update addresses by id
+     * Update address by id
      *
+     * @param int $addressbId
      * @param array $params
-     * @return Collection
+     * @return void
      */
-    public function update(int $jobId, array $params): Collection
+    public function updateAddress(int $addressbId, array $params): void
     {
         try {
             $data = [
-                "state" => $params['state'],
-                "city" => $params['city'],
-                "cep" => $params['cep'] ?? null,
-                "street" => $params['street'] ?? null,
-                "number" => $params['number'] ?? null,
-                "complement" => $params['complement'] ?? null,
-                "neighborhood" => $params['neighborhood'] ?? null
+                'city' => $params['city'],
+                'state' => $params['state'],
+                'cep' => $params['cep'],
+                'neighborhood' => $params['neighborhood'],
+                'street' => $params['street'],
+                'number' => $params['number'],
+                'complement' => $params['complement']
             ];
-
-            return collect(Addresses::where('id', $jobId)->update($data));
-        } catch (Exception) {
-            throw new AddressException('erro ao atualizar endereço');
+            Addresses::where('id', $addressbId)->update($data);
+        } catch (Exception $e) {
+            throw new JobException('erro ao atualizar vaga de emprego');
         }
     }
 
