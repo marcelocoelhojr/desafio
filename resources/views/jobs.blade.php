@@ -6,17 +6,11 @@
 @yield('registerModal')
 @yield('editModal')
 <link href="{{ asset('css/job.css') }}" rel="stylesheet">
+<input type="hidden" value="job" id="pageIdentifier">
 <div class="mt-3 d-flex justify-content-center flex-column">
     <div class="d-flex flex-column mt-3">
         <div class="container d-flex justify-content-between mb-3 flex-wrap">
-            <div class="d-flex col-6">
-                <input type="text" class="form-control">
-                <button class="ml-1 btn btn-dark">Pesquisar</button>
-                <div class="">
-                    <button class="ml-2 btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">Filtros</button>
-                </div>
-            </div>
+            @yield('filterButton')
             <div>
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#register">+ Cadastrar Vaga</button>
             </div>

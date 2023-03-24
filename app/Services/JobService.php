@@ -110,11 +110,13 @@ class JobService
     /**
      * Get jobs with pages for view
      *
+     * @param array $params
      * @return Collection
      */
     public function listView(array $params): Collection
     {
-        $this->checkFilterCache($params);
+        $cache = new CacheService();
+        $cache->checkFilterCache($params, self::CACHE_FILTER_NAME);
         $perPage = $params['per_page'] ?? 5;
 
         return $this->getJobs($perPage);
@@ -139,22 +141,8 @@ class JobService
      */
     public function cache(array $filters): array
     {
-        Cache::put(self::CACHE_FILTER_NAME, $filters, self::CACHE_TIME);
+        $cache = new CacheService();
 
-        return $filters;
-    }
-
-    /**
-     * Check filter cache
-     *
-     * @param array $params
-     * @return void
-     */
-    private function checkFilterCache(array &$params): void
-    {
-        if (Cache::has(self::CACHE_FILTER_NAME) == null) {
-            return;
-        }
-        $params = Cache::get(self::CACHE_FILTER_NAME);
+        return $cache->createFilterCache($filters, self::CACHE_FILTER_NAME, self::CACHE_TIME);
     }
 }

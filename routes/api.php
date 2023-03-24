@@ -16,16 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('cache')->group(function () {
-    Route::post('/', [JobController::class, 'filterCache']);
-});
-
 Route::prefix('job')->group(function () {
     Route::post('/create', [JobController::class, 'create']);
     Route::get('/list', [JobController::class, 'list']);
     Route::get('/{id}', [JobController::class, 'getJob']);
     Route::put('/update/{id}', [JobController::class, 'update']);
     Route::delete('/{id}', [JobController::class, 'delete']);
+    Route::post('/cache', [JobController::class, 'filterCache']);
 });
 
 Route::prefix('address')->group(function () {
@@ -35,4 +32,5 @@ Route::prefix('address')->group(function () {
 Route::prefix('candidate')->group(function () {
     Route::get('/list', [CandidateController::class, 'listCandidates']);
     Route::post('/update', [CandidateController::class, 'updateCandidate']);
+    Route::post('/cache', [CandidateController::class, 'filterCache']);
 });
