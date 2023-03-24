@@ -1,7 +1,11 @@
 @extends('layout')
 @section('content')
 @include('components.candidates.editModal')
-<div>
+@include('components.filters')
+@yield('filterButton')
+@yield('filters')
+<input type="hidden" value="candidate" id="pageIdentifier">
+<div class="mt-2">
     <table class="table table-striped">
         <thead>
             <tr>
