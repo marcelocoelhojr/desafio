@@ -13,6 +13,7 @@ class JobService
 {
     const CACHE_TIME = 76800; //2 hours in seconds
     const CACHE_FILTER_NAME =  'job_filters';
+    const PER_PAGE =  5;
 
     /**
      * Create job and address
@@ -117,7 +118,7 @@ class JobService
     {
         $cache = new CacheService();
         $cache->checkFilterCache($params, self::CACHE_FILTER_NAME);
-        $perPage = $params['per_page'] ?? 5;
+        $perPage = $params['per_page'] ?? self::PER_PAGE;
 
         return $this->getJobs($perPage);
     }
@@ -144,5 +145,15 @@ class JobService
         $cache = new CacheService();
 
         return $cache->createFilterCache($filters, self::CACHE_FILTER_NAME, self::CACHE_TIME);
+    }
+
+    public function search(array $params)
+    {
+        $perPage = $params['per_page'] ?? self::PER_PAGE;
+        $search = $params['search'];
+        $cache = new CacheService();
+        $cache->checkFilterCache($params, self::CACHE_FILTER_NAME);
+
+        return collect(Job::with('address')->where('title', 'LIKE', '%' . $search . '%')->paginate($perPage));
     }
 }
